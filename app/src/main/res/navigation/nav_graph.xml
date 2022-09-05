@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav"
+    app:startDestination="@id/startFragment">
+
+    <fragment
+        android:id="@+id/restaurantListFragment"
+        android:name="com.example.dinner_time.presentation.restaurant_list.RestaurantListFragment"
+        android:label="RestaurantListFragment" >
+        <action
+            android:id="@+id/action_restaurantListFragment_to_restaurantDetailsFragment"
+            app:destination="@id/restaurantDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/restaurantDetailsFragment"
+        android:name="com.example.dinner_time.presentation.restaurant_details.RestaurantDetailsFragment"
+        android:label="RestaurantDetailsFragment" />
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.dinner_time.presentation.start.StartFragment"
+        android:label="StartFragment" >
+        <action
+            android:id="@+id/action_startFragment_to_restaurantListFragment"
+            app:destination="@id/restaurantListFragment" />
+    </fragment>
+</navigation>

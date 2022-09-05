@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Dinner Time</string>
+    <string name="site">Сайт:</string>
+    <string name="phone">Телефон:</string>
+    <string name="this_application_needs_geolocation_permission_to_work">This application needs geolocation permission to work</string>
+    <string name="request_permission">Request permission</string>
+</resources>
