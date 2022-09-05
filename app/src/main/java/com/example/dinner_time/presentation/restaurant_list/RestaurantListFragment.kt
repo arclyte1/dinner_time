@@ -1,5 +1,7 @@
 package com.example.dinner_time.presentation.restaurant_list
 
+import android.content.res.Configuration
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
@@ -28,10 +30,17 @@ class RestaurantListFragment: Fragment(R.layout.fragment_rastaurant_list) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRastaurantListBinding.bind(view)
 
+        binding.refresh.setOnRefreshListener {
+            refreshList()
+        }
+
         restaurantListAdapter.onClickListener = RestaurantListAdapter.OnClickListener {
             showRestaurant(it)
         }
         binding.recyclerView.adapter = restaurantListAdapter
+
+        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
+            requireActivity().finishAndRemoveTask()
 
         lifecycleScope.launchWhenStarted {
             viewModel.getRestaurantsState.collect {
@@ -52,6 +61,12 @@ class RestaurantListFragment: Fragment(R.layout.fragment_rastaurant_list) {
         }
 
 
+    }
+
+    fun refreshList() {
+        requireActivity().finishAndRemoveTask()
+        viewModel.refreshRestaurants(requireContext())
+        binding.refresh.isRefreshing = false
     }
 
     fun showRestaurant(restaurantId: Long) {

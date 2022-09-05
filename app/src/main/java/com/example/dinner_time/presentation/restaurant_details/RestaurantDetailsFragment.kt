@@ -22,8 +22,6 @@ class RestaurantDetailsFragment: Fragment(R.layout.fragment_restaurant_details) 
 
     private val viewModel: RestaurantDetailsViewModel by viewModels()
 
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentRestaurantDetailsBinding.bind(view)
@@ -65,9 +63,9 @@ class RestaurantDetailsFragment: Fragment(R.layout.fragment_restaurant_details) 
 
         if (restaurant.phones != null) {
             binding.phoneNumber.setTextColor(Color.BLUE)
-            binding.phoneNumber.setOnClickListener {
-                dialCall(restaurant.phones[0])
-            }
+//            binding.phoneNumber.setOnClickListener {
+//                dialCall(restaurant.phones[0])
+//            }
         }
 
         if (restaurant.address != null) {

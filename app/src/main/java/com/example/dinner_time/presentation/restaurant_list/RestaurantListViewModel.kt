@@ -30,6 +30,10 @@ class RestaurantListViewModel @Inject constructor(
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     init {
+        refreshRestaurants(context)
+    }
+
+    fun refreshRestaurants(context: Context) {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location : Location? ->
