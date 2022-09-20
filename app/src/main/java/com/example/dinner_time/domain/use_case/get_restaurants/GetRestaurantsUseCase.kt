@@ -12,8 +12,12 @@ class GetRestaurantsUseCase @Inject constructor(
     private val repository: RestaurantRepository
 ) {
     operator fun invoke(startPoint: Geometry, radius: Double): Flow<Resource<List<Restaurant>>> = flow {
-        emit(Resource.Loading())
-        val restaurants = repository.getRestaurants(startPoint, radius)
-        emit(Resource.Success(restaurants))
+        try {
+            emit(Resource.Loading())
+            val restaurants = repository.getRestaurants(startPoint, radius)
+            emit(Resource.Success(restaurants))
+        } catch (e: Exception) {
+            emit(Resource.Error(e.localizedMessage ?: "Unknown error"))
+        }
     }
 }
