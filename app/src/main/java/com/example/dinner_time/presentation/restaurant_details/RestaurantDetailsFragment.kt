@@ -46,7 +46,7 @@ class RestaurantDetailsFragment: Fragment(R.layout.fragment_restaurant_details) 
         viewModel.getRestaurant(restaurantId)
     }
 
-    fun setRestaurant(restaurant: Restaurant) {
+    private fun setRestaurant(restaurant: Restaurant) {
         binding.title.text = restaurant.title
         binding.categories.text = restaurant.categories?.joinToString()
         binding.address.text = restaurant.address ?: ""
@@ -63,9 +63,9 @@ class RestaurantDetailsFragment: Fragment(R.layout.fragment_restaurant_details) 
 
         if (restaurant.phones != null) {
             binding.phoneNumber.setTextColor(Color.BLUE)
-//            binding.phoneNumber.setOnClickListener {
-//                dialCall(restaurant.phones[0])
-//            }
+            binding.phoneNumber.setOnClickListener {
+                dialCall(restaurant.phones[0])
+            }
         }
 
         if (restaurant.address != null) {
@@ -76,19 +76,19 @@ class RestaurantDetailsFragment: Fragment(R.layout.fragment_restaurant_details) 
         }
     }
 
-    fun openWebPage(url: String) {
+    private fun openWebPage(url: String) {
         val webpage = Uri.parse(url)
         val intent = Intent(Intent.ACTION_VIEW, webpage)
         startActivity(intent)
     }
 
-    fun dialCall(phoneNumber: String) {
+    private fun dialCall(phoneNumber: String) {
         val uri = Uri.parse("tel:$phoneNumber")
         val intent = Intent(Intent.ACTION_DIAL, uri)
         startActivity(intent)
     }
 
-    fun showMap(latitude: Double, longitude: Double) {
+    private fun showMap(latitude: Double, longitude: Double) {
         val uri = Uri.parse("geo:$latitude,$longitude")
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(intent)

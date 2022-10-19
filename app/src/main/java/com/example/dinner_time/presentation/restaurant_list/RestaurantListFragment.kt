@@ -39,9 +39,6 @@ class RestaurantListFragment: Fragment(R.layout.fragment_rastaurant_list) {
         }
         binding.recyclerView.adapter = restaurantListAdapter
 
-        if (resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE)
-            requireActivity().finishAndRemoveTask()
-
         lifecycleScope.launchWhenStarted {
             viewModel.getRestaurantsState.collect {
 
@@ -63,13 +60,12 @@ class RestaurantListFragment: Fragment(R.layout.fragment_rastaurant_list) {
 
     }
 
-    fun refreshList() {
-        requireActivity().finishAndRemoveTask()
+    private fun refreshList() {
         viewModel.refreshRestaurants(requireContext())
         binding.refresh.isRefreshing = false
     }
 
-    fun showRestaurant(restaurantId: Long) {
+    private fun showRestaurant(restaurantId: Long) {
         val bundle = bundleOf(Constants.RESTAURANT_ID_FIELD to restaurantId)
         findNavController().navigate(R.id.action_restaurantListFragment_to_restaurantDetailsFragment, bundle)
     }
